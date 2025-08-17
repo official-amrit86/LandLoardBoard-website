@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LandlordBoard Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #f5f7fa;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 5rem;
+      width: 15rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 600;
+      padding: 10px 15px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      background: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    nav a:hover {
+      color: #007bff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 123, 255, 0.2);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      height: 3px;
+      width: 25px;
+      background-color: #333;
+      margin: 4px 0;
+    }
+
+    /* Section Styling */
+    section {
+      padding: 60px 20px;
+      text-align: center;
+      background: white;
+      margin: 20px auto;
+      max-width: 1100px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #3f51b5;
+      margin-bottom: 15px;
+    }
+
+    section p {
+      font-size: 1rem;
+      color: #555;
+      max-width: 700px;
+      margin: auto;
+      margin-bottom: 25px;
+    }
+
+    .cta-btn {
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        margin-top: 10px;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      nav a {
+        width: 100%;
+        padding: 12px 20px;
+        background: #f5f5f5;
+        border-radius: 8px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    /* Home section*/
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f8ff;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    /* Home Section */
+    .home-section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    .section-heading {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #1a1a1a;
+    }
+
+    .hero-content {
+      display: flex;
+      height: 80vh;
+      /* full height */
+      min-height: 500px;
+      gap: 40px;
+      align-items: stretch;
+      /* children fill height */
+    }
+
+    .hero-text {
+      flex: 1 1 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #af04c6;
+      max-width: 600px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .highlight {
+      color: #433cc7;
+      /* Indigo */
+      background: #e0e7ff;
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+
+    .description {
+      font-size: 1.15rem;
+      margin-top: 0px;
+      color: #555;
+      line-height: 1.3;
+      /* tighter line spacing */
+      max-width: 600px;
+      /* keep text width controlled */
+      word-break: normal;
+      white-space: normal;
+    }
+
+    .flexDiv {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .storeLink {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: 50px;
+      padding: 10px 20px;
+      background: #4f46e5;
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgb(79 70 229 / 0.4);
+      transition: background-color 0.3s ease;
+    }
+
+    .storeLink:hover {
+      background: #4338ca;
+    }
+
+    .storeIcon {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .hero-image {
+      flex: 1 1 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .phone-frame {
+      border: 16px solid #ddd;
+      border-radius: 36px;
+      box-shadow: 0 20px 50px rgb(79 70 229 / 0.2);
+      width: 270px;
+      height: 540px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      overflow: hidden;
+    }
+
+    .phone-frame img {
+      width: 250px;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 24px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+      }
+
+      .hero-text,
+      .hero-image {
+        max-width: 100%;
+        height: auto;
+        justify-content: center;
+      }
+
+      .flexDiv {
+        justify-content: center;
+      }
+    }
+
+
+    /* About section */
+    .about-section {
+      background: linear-gradient(135deg, #f0f9ff, #e0f7fa, #fce4ec);
+      padding: 80px 20px;
+      text-align: center;
+      max-width: 1200px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 50px;
+      color: #6500f2;
+      max-width: 1200px;
+    }
+
+    .about-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .about-images-left,
+    .about-images-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .image-card {
+      background: white;
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .image-card img {
+      max-width: 180px;
+      border-radius: 10px;
+    }
+
+    .image-card:hover {
+      transform: translateY(-8px) rotate3d(1, 1, 0, 8deg) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-text-content {
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .about-text-content h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #00796b;
+    }
+
+    .about-text-content span {
+      color: #ff4081;
+    }
+
+    .about-text-content p {
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .about-text-content ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .about-text-content li {
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #ff4081, #f50057);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 64, 129, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .about-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-text-content {
+        text-align: center;
+      }
+
+      .image-card img {
+        max-width: 150px;
+      }
+    }
+
+
+
+
+    /* Feature section styles - matching header size */
+    .features-section {
+      max-width: 1200px;
+      background: linear-gradient(to right, #f5f7fa, #e0eafc);
+      padding: 60px 20px;
+      /* same spacing rhythm as header */
+    }
+
+    .features-container {
+      max-width: 1200px;
+      /* same as header container */
+      margin: auto;
+      text-align: center;
+    }
+
+    .features-container h2 {
+      font-size: 2rem;
+      /* matching header link height */
+      font-weight: bold;
+      color: #4404cd;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card img {
+      width: 50px;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      color: #3f51b5;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    /* support-section css*/
+    /* Support Section */
+    .support-section {
+      max-width: 1200px;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #d4e1f5, #b3c8ff, #99aaff);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .support-container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .support-card {
+      background: linear-gradient(145deg, #ffffff, #f4f6ff);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),
+        inset 0 -5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .support-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .support-card h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #2b2b52;
+    }
+
+    .support-card h2 i {
+      color: #ff5e78;
+      margin-right: 10px;
+    }
+
+    .support-card h3 {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #3c3c70;
+    }
+
+    .support-card h3 i {
+      color: #4a90e2;
+      margin-right: 8px;
+    }
+
+    .support-card p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .support-benefits {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+    }
+
+    .support-benefits li {
+      font-size: 1rem;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      color: #333;
+    }
+
+    .support-benefits li i {
+      color: #4a90e2;
+      font-size: 1.2rem;
+      margin-right: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .support-card {
+        padding: 25px;
+      }
+
+      .support-card h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+
+    /* Privacy Section */
+    .privacy-section {
+      max-width: 1200px;
+      background: linear-gradient(135deg, #f0f4ff, #e4ecf7);
+      padding: 60px 20px;
+    }
+
+    .privacy-container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .privacy-card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), inset 0 2px 8px rgba(255, 255, 255, 0.3);
+      transform: perspective(1000px) rotateX(0deg);
+      transition: transform 0.4s ease;
+    }
+
+    .privacy-card:hover {
+      transform: perspective(1000px) rotateX(2deg);
+    }
+
+    .privacy-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 15px;
+      text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .privacy-intro {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .privacy-column h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .privacy-column p {
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .privacy-column ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .privacy-column ul li {
+      background: #f8faff;
+      margin-bottom: 8px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05);
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .note {
+      margin-top: 30px;
+      font-size: 1rem;
+      text-align: center;
+      color: #444;
+    }
+
+    .note a {
+      color: #2563eb;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .privacy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* Terms of Use Section */
+    /* Main Container */
+    .terms-section {
+
+      max-width: 1200px;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #f0f4ff, #e6e9f5);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .terms-container {
+      max-width: 1200px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .terms-flex {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    /* Image Side */
+    .terms-image img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .terms-image img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Text Side */
+    .terms-card {
+      background: #ffffff;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .terms-card h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    .terms-card h2 i {
+      color: #3498db;
+      margin-right: 10px;
+    }
+
+    .terms-card h3 {
+      font-size: 1.25rem;
+      margin-top: 25px;
+      color: #34495e;
+    }
+
+    .terms-card h3 i {
+      color: #ff9800;
+      margin-right: 8px;
+    }
+
+    .terms-card p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .terms-card ul {
+      padding-left: 20px;
+    }
+
+    .terms-card li {
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    /* Note */
+    .note {
+      background: linear-gradient(145deg, #dfe9f3, #ffffff);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 0.95rem;
+      box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .note i {
+      color: #3498db;
+      margin-right: 6px;
+    }
+
+    .note a {
+      color: #3498db;
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .terms-flex {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .terms-image img {
+        max-width: 100%;
+      }
+    }
+
+
+    /* FAQs Section */
+    .faqs-section {
+      max-width: 1200px;
+      padding: 50px 20px;
+      background: #f8f9fa;
+    }
+
+    .faqs-container {
+      max-width: 1200px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .faqs-card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .faqs-img {
+      width: 80px;
+      display: block;
+      margin: auto;
+    }
+
+    .faqs-card h2 {
+      text-align: center;
+      margin-top: 15px;
+      color: #222;
+    }
+
+    .faqs-card>p {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      outline: none;
+      text-align: left;
+      padding: 15px 0;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .faq-question::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-question::after {
+      content: "-";
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-answer p {
+      padding: 0 0 15px;
+      color: #555;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .cta-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="/assets/landlord-logo.jpg" alt="LandlordBoard Logo" />
+      </div>
+      <div class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#Support">Support Us</a>
+        <a href="#Privacy">Privacy Policy</a>
+        <a href="#Terms">Terms of Use</a>
+        <a href="#FAQs">FAQs</a>
+      </nav>
+    </div>
+  </header>
+  <!-- Home Section -->
+  <section id="home" class="home-section">
+    <!-- <h2 class="section-heading">LandlordBoard Pro</h2> -->
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>LandlordBoard Pro-<span class="highlight">LandlordBoard Pro Smart Landlord Dashboard for Rentals</span></h1>
+        <p class="description">
+          LandlordBoard Pro is a comprehensive mobile application (iOS &amp; Android, built with React Native) designed
+          to
+          streamline property and tenant management for landlords. The platform offers a 30-day full-feature trial,
+          offline-first functionality, and encrypted cloud backups.
+        </p>
+        <div class="flexDiv">
+          <a href="https://apps.apple.com/in/app/cryptiview/id6748292132" class="storeLink" target="_blank"
+            rel="noopener noreferrer">
+            <img src="https://cryptiview.com/landingPage/app-store.png" alt="App Store Logo"
+              class="hero-logo storeIcon" />
+            <span>App Store</span>
+          </a>
+          <a href="https://play.google.com/store/apps?hl=en_IN" class="storeLink" target="_blank"
+            rel="noopener noreferrer">
+            <img src="https://cryptiview.com/landingPage/playstore.png" alt="Play Store Logo"
+              class="hero-logo storeIcon" />
+            <span>Play Store</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="phone-frame">
+          <img src="./assets/appartment.png" alt="profile in phone" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- About section -->
+  <section id="about" class="about-section">
+    <h2 class="section-title">About Us</h2>
+    <div class="about-container">
+      <!-- Left Images -->
+      <div class="about-images-left">
+        <div class="image-card">
+          <img src="./assets/appartment.png" alt="appartment" />
+        </div>
+        <div class="image-card">
+          <img src="./assets/houseconnect.png" alt="houseconnect" />
+        </div>
+        <div class="image-card">
+          <img src="./assets/landloard.png" alt="Tenant Management" />
+        </div>
+      </div>
+
+      <!-- Text Content -->
+      <div class="about-text-content">
+        <h2>Welcome to <span>LandlordBoard Pro</span></h2>
+        <p>
+          Transform your property management experience with <b>LandlordBoard Pro</b> —
+          the all-in-one platform for landlords and property managers.
+          From automated rent collection to seamless tenant communication and real-time
+          maintenance tracking, we help you work smarter, not harder.
+        </p>
+        <ul>
+          <li>📊 Powerful analytics & reports</li>
+          <li>💬 Instant tenant messaging</li>
+          <li>⚡ Automated payment reminders</li>
+        </ul>
+        <!-- <a href="#contact" class="cta-btn">Get Started</a> -->
+      </div>
+
+      <!-- Right Images -->
+      <div class="about-images-right">
+        <div class="image-card">
+          <img src="./assets/landloardimage.png" alt="Landlord Dashboard" />
+        </div>
+        <div class="image-card">
+          <img src="./assets/phonestock.png" alt="Landlord Dashboard" />
+        </div>
+        <div class="image-card">
+          <img src="./assets/landloardstock.png" alt="Landlord Dashboard" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Features -->
+  <section id="features" class="features-section">
+    <div class="features-container">
+      <h2>Our Powerful Features</h2>
+      <p class="subtitle">Everything a modern landlord needs — all in one place.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/484/484167.png" alt="Rent Icon">
+          <h3>Online Rent Collection</h3>
+          <p>Securely collect rent online and receive instant notifications on payments.</p>
+        </div>
+
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/1533/1533889.png" alt="Tenant Icon">
+          <h3>Tenant Management</h3>
+          <p>Keep all tenant info organized and accessible. Communicate seamlessly.</p>
+        </div>
+
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Maintenance Icon">
+          <h3>Maintenance Tracking</h3>
+          <p>Track repairs and maintenance requests with automated status updates.</p>
+        </div>
+
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/724/724933.png" alt="Analytics Icon">
+          <h3>Financial Analytics</h3>
+          <p>Get detailed reports on income, expenses, and property performance.</p>
+        </div>
+
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/3176/3176295.png" alt="Document Icon">
+          <h3>Document Storage</h3>
+          <p>Store lease agreements, receipts, and tenant documents digitally.</p>
+        </div>
+
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/1003/1003821.png" alt="Notification Icon">
+          <h3>Smart Notifications</h3>
+          <p>Never miss a rent due date or maintenance update with smart alerts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Support Us -->
+  <section id="Support" class="support-section">
+    <div class="support-container">
+      <div class="support-card">
+        <h2><i class="fas fa-hand-holding-heart"></i> Support LandlordBoard Pro</h2>
+        <p>
+          LandlordBoard Pro is more than just a tool — it’s a complete ecosystem
+          designed to make property management effortless, transparent, and
+          secure. By supporting us, you empower thousands of landlords and tenants
+          to manage their properties efficiently from anywhere in the world.
+        </p>
+
+        <h3><i class="fas fa-star"></i> Why Your Support Matters</h3>
+        <div><br>
+
+        </div>
+        <!-- <div > -->
+        <img src="./assets/support1.png" alt="" style="width:60%; border-radius:10px; transition:0.3s;"
+          onmouseover="this.style.borderRadius='50px'; this.style.transform='scale(1.05)';"
+          onmouseout="this.style.borderRadius='10px'; this.style.transform='scale(1)';">
+        <!-- <img src="./assets/email.png" alt="" style="margin:100px;"> -->
+        <!-- </div> -->
+
+
+      </div>
+    </div>
+    </div>
+
+    <ul class="support-benefits">
+      <li><i class="fas fa-rocket"></i> Develop new AI-driven features for faster decision-making</li>
+      <li><i class="fas fa-mobile-alt"></i> Expand mobile app capabilities for on-the-go management</li>
+      <li><i class="fas fa-shield-alt"></i> Enhance data security to protect sensitive property information</li>
+      <li><i class="fas fa-book-open"></i> Provide free educational resources for first-time landlords</li>
+      <li><i class="fas fa-language"></i> Create multilingual support for global users</li>
+    </ul>
+
+    <h3><i class="fas fa-bullseye"></i> Our Vision</h3>
+    <p>
+      We aim to build a future where property management is stress-free,
+      automated, and available at your fingertips — whether you manage one
+      rental unit or hundreds of properties worldwide.
+    </p>
+
+    <h3><i class="fas fa-donate"></i> How We Use Your Contribution</h3>
+    <p>
+      Every contribution directly funds our platform improvements,
+      infrastructure scaling, customer support expansion, and development
+      of new features to make your experience even better.
+    </p>
+    </div>
+    </div>
+
+  </section>
+
+  </section>
+
+  <!-- Privacy Policy -->
+  <section id="Privacy" class="privacy-section">
+    <div class="privacy-container">
+      <div class="privacy-card">
+        <h2 class="privacy-title">Privacy Policy</h2>
+        <p class="privacy-intro">
+          At <strong>LandlordBoard Pro</strong>, your privacy is our top priority.
+          We are committed to protecting your personal data and ensuring that
+          all information you share with us remains secure and confidential.
+        </p>
+
+        <div class="privacy-grid">
+          <!-- Column 1 -->
+          <div class="privacy-column">
+            <h3>Information We Collect</h3>
+            <ul>
+              <li>✔ Account details such as name, email address, and phone number</li>
+              <li>✔ Property details you choose to upload</li>
+              <li>✔ Payment transaction information (processed via secure gateways)</li>
+              <li>✔ Device and usage data to improve our services</li>
+            </ul>
+
+            <h3>Data Protection</h3>
+            <p>
+              We implement strong encryption and follow industry-standard practices
+              to ensure your data is protected from unauthorized access, alteration,
+              or loss.
+            </p>
+          </div>
+
+          <!-- Column 2 -->
+          <div class="privacy-column">
+            <h3>How We Use Your Data</h3>
+            <ul>
+              <li>✔ Managing your landlord and tenant accounts</li>
+              <li>✔ Processing rent payments securely</li>
+              <li>✔ Sending important updates and notifications</li>
+              <li>✔ Improving platform features based on user feedback</li>
+            </ul>
+
+            <h3>Your Rights</h3>
+            <ul>
+              <li>✔ Access your personal data at any time</li>
+              <li>✔ Request data correction or deletion</li>
+              <li>✔ Opt-out of marketing communications</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="note">
+          For any privacy-related concerns or requests, please email us at
+          <a href="mailto:privacy@landlordboard.com">privacy@landlordboard.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Terms of Use -->
+  <section id="Terms" class="terms-section">
+    <div class="terms-container">
+      <div class="terms-flex">
+
+        <!-- Left Side - Image -->
+        <!-- <div class="terms-image">
+        <img src="./assets/terms.png" alt="Terms of Use" />
+      </div> -->
+
+
+
+        <!-- Right Side - Text -->
+        <div class="terms-card">
+          <h2><i class="fas fa-file-contract"></i> Terms of Use</h2>
+          <p>
+            Welcome to LandlordBoard. By accessing or using our platform, you agree to be bound by these terms,
+            designed to protect both landlords and tenants while ensuring smooth operations.
+          </p>
+
+          <h3><i class="fas fa-handshake"></i> 1. Acceptance of Terms</h3>
+          <p>
+            By creating an account or using our services, you acknowledge that you have read and understood
+            our terms and agree to comply with them.
+          </p>
+
+          <h3><i class="fas fa-user-check"></i> 2. User Responsibilities</h3>
+          <ul>
+            <li>Provide accurate and up-to-date information.</li>
+            <li>Use the platform for lawful purposes only.</li>
+            <li>Respect other users and maintain professionalism.</li>
+          </ul>
+
+          <h3><i class="fas fa-ban"></i> 3. Prohibited Activities</h3>
+          <ul>
+            <li>No fraudulent or misleading activities.</li>
+            <li>No harassment, hate speech, or abuse.</li>
+            <li>No distribution of harmful content.</li>
+          </ul>
+
+          <h3><i class="fas fa-exclamation-triangle"></i> 4. Limitation of Liability</h3>
+          <p>
+            LandlordBoard will not be held responsible for any disputes, losses, or damages arising from
+            interactions between landlords and tenants.
+          </p>
+
+          <h3><i class="fas fa-sync-alt"></i> 5. Changes to Terms</h3>
+          <p>
+            We reserve the right to update or modify these terms at any time.
+            Continued use of the platform indicates your acceptance of the new terms.
+          </p>
+
+          <p class="note">
+            <i class="fas fa-envelope"></i> For any questions, please contact our support team at
+            <a href="mailto:support@landlordboard.com">support@landlordboard.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+
+  <!-- FAQs -->
+  <!-- FAQs Section -->
+  <section id="FAQs" class="faqs-section">
+    <div class="faqs-container">
+      <div class="faqs-card">
+        <img src="./assets/faqs.png" alt="FAQs" class="faqs-img" />
+        <h2>Frequently Asked Questions</h2>
+        <p>We’ve gathered the most common questions about LandlordBoard to help you find quick answers.</p>
+
+        <div class="faq-item">
+          <button class="faq-question">1. What is LandlordBoard?</button>
+          <div class="faq-answer">
+            <p>LandlordBoard is a platform designed to help landlords manage properties, tenants, and rental payments
+              efficiently.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">2. How can I register?</button>
+          <div class="faq-answer">
+            <p>Click on the “Sign Up” button on our homepage and fill out the required details. You’ll get access to
+              your dashboard instantly.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">3. Is my data secure?</button>
+          <div class="faq-answer">
+            <p>Yes. We use advanced encryption and security measures to ensure your personal and property data stays
+              protected.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">4. Can I access LandlordBoard on mobile?</button>
+          <div class="faq-answer">
+            <p>Absolutely! Our platform is mobile-friendly and works smoothly on all devices.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">5. How do I contact support?</button>
+          <div class="faq-answer">
+            <p>You can use our in-app chat or email us at <a
+                href="mailto:support@landlordboard.com">support@landlordboard.com</a> anytime.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll(".faq-question").forEach(button => {
+      button.addEventListener("click", () => {
+        const faqItem = button.parentElement;
+        faqItem.classList.toggle("active");
+
+        // Close other open FAQs
+        document.querySelectorAll(".faq-item").forEach(item => {
+          if (item !== faqItem) {
+            item.classList.remove("active");
+          }
+        });
+      });
+    });
+    //
+    // Content for routes
+    const sections = document.querySelectorAll('section');
+
+    function showSection(id) {
+      sections.forEach(section => {
+        section.style.display = (section.id === id) ? 'block' : 'none';
+      });
+
+      // Change URL without reloading
+      if (id === 'home') {
+        // Use the current file name (keep URL as is)
+        // So, replace path with just file name and query + hash if needed
+        const currentPath = window.location.pathname;
+        const filename = currentPath.substring(currentPath.lastIndexOf('/') + 1) || 'index.html';
+        history.pushState(null, '', filename + window.location.search + window.location.hash);
+      } else {
+        // For other sections, update URL to /sectionName
+        history.pushState(null, '', `/${id}`);
+      }
+    }
+
+    // Show home section initially
+    showSection('home');
+
+    // Handle navigation clicks
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        showSection(targetId);
+      });
+    });
+
+
+  </script>
+
+
+</body>
+
+</html>
